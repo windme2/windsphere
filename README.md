@@ -56,7 +56,7 @@ src/
 
 ### Clone the repository
 ```bash
-git clone https://github.com/yourusername/windsphere.git
+git clone https://github.com/windme2/windsphere.git
 ```
 
 ### Navigate to project directory
@@ -93,7 +93,7 @@ VITE_WEATHER_API_KEY=your_api_key_here
 |------|-------------|
 | `vite.config.ts` | ⚡ Vite bundler configuration |
 | `tailwind.config.js` | 🎨 TailwindCSS customization |
-| `postcss.config.js` | 🎯 PostCSS plugins setup |
+| `postcss.config.cjs` | 🎯 PostCSS plugins setup |
 | `tsconfig.json` | 📘 TypeScript compiler options |
 
 ## 🤝 Contributing
