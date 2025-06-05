@@ -1,19 +1,19 @@
 # 🌤️ Wind Sphere
 
 ## 📖 Overview
-A modern weather forecast application for Bangkok Metropolitan Region. Get accurate weather information with a beautiful and intuitive interface, built with React and TypeScript.
+A modern weather forecast application for Bangkok Metropolitan Region. Get accurate weather information with a beautiful and intuitive interface.
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework:** React 18
-- **Type Safety:** TypeScript
-- **Build Tool:** Vite
-- **Styling:** TailwindCSS
-- **UI Components:** Radix UI
-- **Routing:** React Router DOM
-- **Data Fetching:** React Query
-- **Type Validation:** Zod
-- **Weather API:** OpenWeather API
+- **Frontend Framework: React**
+- **Type Safety: TypeScript**
+- **Build Tool: Vite**
+- **Styling: TailwindCSS**
+- **UI Components: Radix UI**
+- **Routing: React Router**
+- **Data Fetching: React Query**
+- **Type Validation: Zod**
+- **Weather API: OpenWeather API**
 
 ## 📁 Project Structure
 ```
