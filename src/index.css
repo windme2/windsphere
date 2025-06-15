@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --primary: 201 96% 32%;
+    --primary-foreground: 210 40% 98%;
+    --card-rgb: 255 255 255;
+    --radius: 1rem;
+  }
+
+  body {
+    @apply min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-blue-600;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@layer components {
+  .glass-base {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
+
+  .hover-base {
+    @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+
+  .glass-card {
+    @apply glass-base hover-base rounded-3xl;
+  }
+
+  .weather-icon {
+    @apply animate-float filter drop-shadow-lg;
+  }
+
+  .stat-base {
+    @apply p-4 rounded-2xl bg-gradient-to-br from-white/30 to-transparent 
+           backdrop-blur-sm border border-white/20 transition-all duration-300;
+  }
+
+  .weather-stat {
+    @apply stat-base hover:from-white/50 hover:to-white/30;
+  }
+
+  .forecast-card {
+    @apply glass-card p-6 hover:scale-[1.02] hover:bg-white/90;
+  }
+
+  .icon-container {
+    @apply p-3 rounded-full stat-base shadow-lg hover:shadow-xl;
+  }
+}
