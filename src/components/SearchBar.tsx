@@ -7,7 +7,7 @@ import { WeatherService } from "@/services/weather.service";
 
 interface SearchBarProps {
   onSearch: (city: string) => void;
-  initialCity?: string;
+  initialCity?: string; // Enhanced search functionality
   isLoading?: boolean;
 }
 
