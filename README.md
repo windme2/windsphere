@@ -9,7 +9,8 @@ A modern weather forecast application for **Bangkok Metropolitan Region**. Get a
 ## ⚙️ Tech Stack
 
 - **Frontend:** React 18, TypeScript, Vite, TailwindCSS
-- **UI Components:** shadcn/ui, Radix UI, Lucide React
+- **UI Components:** shadcn/ui, Radix UI, Lucide React Icons
+- **Location Data:** Bangkok Districts & Metropolitan Region
 - **Routing:** React Router DOM
 - **Data Fetching:** TanStack React Query
 - **Build Tools:** Vite, PostCSS, Autoprefixer
