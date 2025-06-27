@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 interface ForecastListProps {
-  forecast: ForecastDay[];
+  forecast: ForecastDay[]; // 5-day forecast data
   className?: string;
 }
 
