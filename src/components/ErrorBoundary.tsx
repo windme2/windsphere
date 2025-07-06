@@ -6,7 +6,7 @@ interface Props {
 }
 
 interface State {
-  hasError: boolean;
+  hasError: boolean; // Enhanced error tracking
   error: Error | null;
 }
 
