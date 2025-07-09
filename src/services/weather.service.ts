@@ -2,7 +2,7 @@ import { WeatherCondition, CurrentWeather, ForecastDay, WeatherData } from "@/ty
 
 // Weather Demo Configuration
 const DEMO_CONFIG = {
-  CACHE_DURATION: 60000,
+  CACHE_DURATION: 60000, // Optimized caching
   FORECAST_DAYS: 5,
   LOCATION: {
     DEFAULT: "Bangkok",
