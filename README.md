@@ -1,6 +1,5 @@
-# 🌤️ Wind Sphere
+# Wind Sphere 🌤️
 
-## 📖 Overview
 A modern weather forecast application for Bangkok Metropolitan Region. Get accurate weather information with a beautiful and intuitive interface, built with React and TypeScript.
 
 ## 🛠️ Tech Stack
@@ -14,18 +13,6 @@ A modern weather forecast application for Bangkok Metropolitan Region. Get accur
 - **Data Fetching:** React Query
 - **Type Validation:** Zod
 - **Weather API:** OpenWeather API
-
-## 📁 Project Structure
-```
-src/
-├── components/     # Reusable UI components
-├── lib/           # Utilities and helpers
-├── pages/         # Page components
-├── services/      # API services
-├── types/         # TypeScript type definitions
-├── App.tsx        # Main application component
-└── main.tsx       # Application entry point
-```
 
 ## ✨ Features
 
@@ -57,10 +44,6 @@ src/
 ### Clone the repository
 ```bash
 git clone https://github.com/windme2/windsphere.git
-```
-
-### Navigate to project directory
-```bash
 cd windsphere
 ```
 
