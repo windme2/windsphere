@@ -25,10 +25,12 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   };
 
   return (
-    <Card className={cn(
-      "overflow-hidden rounded-xl md:rounded-2xl shadow-md md:shadow-lg animate-fade-in bg-white/70 backdrop-blur-sm",
-      className
-    )}>
+    <Card
+      className={cn(
+        "overflow-hidden rounded-xl md:rounded-2xl shadow-md md:shadow-lg animate-fade-in bg-white/70 backdrop-blur-sm",
+        className
+      )}
+    >
       <CardContent className="p-3 md:p-6">
         <div className="flex items-start gap-3 md:gap-6">
           <div className="flex-1">
@@ -40,7 +42,11 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
             </p>
           </div>
           <div className="flex flex-col items-center">
-            <WeatherIcon condition={weather.condition} size={36} className="md:w-16 md:h-16" />
+            <WeatherIcon
+              condition={weather.condition}
+              size={36}
+              className="md:w-16 md:h-16"
+            />
             <span className="text-xs md:text-base font-medium text-gray-700 mt-1">
               {weather.description}
             </span>
@@ -61,7 +67,9 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
             <div className="flex items-center gap-2">
               <Droplets className="h-4 w-4 md:h-5 md:w-5 text-sky-500" />
               <div>
-                <div className="text-xs md:text-base text-gray-600">Humidity</div>
+                <div className="text-xs md:text-base text-gray-600">
+                  Humidity
+                </div>
                 <div className="text-base md:text-xl font-semibold text-gray-800">
                   {weather.humidity}%
                 </div>
@@ -74,7 +82,9 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
                 <div className="text-xs md:text-base text-gray-600">Wind</div>
                 <div className="text-base md:text-xl font-semibold text-gray-800 whitespace-nowrap">
                   {weather.windSpeed} km/h{" "}
-                  <span className="text-xs md:text-base">{weather.windDirection}</span>
+                  <span className="text-xs md:text-base">
+                    {weather.windDirection}
+                  </span>
                 </div>
               </div>
             </div>

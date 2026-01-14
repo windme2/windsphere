@@ -1,11 +1,18 @@
-import { WeatherCondition, CurrentWeather, ForecastDay, WeatherData } from "@/types/weather";
+import {
+  WeatherCondition,
+  CurrentWeather,
+  ForecastDay,
+  WeatherData,
+} from "@/types/weather";
+import { BANGKOK_DISTRICTS, PERIPHERAL_PROVINCES } from "@/types/location";
+import { ENV, hasApiKey } from "@/config/env";
+import { WeatherApiService } from "./weather.api";
 
-// Weather Demo Configuration
 const DEMO_CONFIG = {
-  CACHE_DURATION: 60000, // Optimized caching
+  CACHE_DURATION: ENV.CACHE_DURATION,
   FORECAST_DAYS: 5,
   LOCATION: {
-    DEFAULT: "Bangkok",
+    DEFAULT: ENV.DEFAULT_LOCATION,
     COUNTRY_CODE: "TH",
   },
   WEATHER: {
@@ -49,13 +56,12 @@ const DEMO_CONFIG = {
     ] as WeatherCondition[],
   },
   ERROR_MESSAGES: {
-    LOCATION_NOT_FOUND: "Location not found",
-    NETWORK_ERROR: "Unable to generate weather data",
-    DEMO_ERROR: "Weather simulation error",
+    LOCATION_NOT_FOUND: "The location you entered could not be found",
+    NETWORK_ERROR: "Unable to connect to weather service",
+    DEMO_ERROR: "Weather simulation error occurred",
   },
 } as const;
 
-// Error Class
 export class WeatherError extends Error {
   constructor(
     message: string,
@@ -67,100 +73,9 @@ export class WeatherError extends Error {
 }
 
 export class WeatherService {
-  // Location Data
-  public static readonly bangkokDistricts = [
-    "Bang Rak",
-    "Pathum Wan",
-    "Sathon",
-    "Bangkok Noi",
-    "Bangkok Yai",
-    "Din Daeng",
-    "Huai Khwang",
-    "Phra Nakhon",
-    "Pom Prap Sattru Phai",
-    "Samphanthawong",
-    "Phaya Thai",
-    "Ratchathewi",
-    "Bang Sue",
-    "Dusit",
-    "Chatuchak",
-    "Lat Phrao",
-    "Lak Si",
-    "Don Mueang",
-    "Sai Mai",
-    "Bang Khen",
-    "Min Buri",
-    "Khlong Sam Wa",
-    "Nong Chok",
-    "Lat Krabang",
-    "Prawet",
-    "Suan Luang",
-    "Khan Na Yao",
-    "Bang Kapi",
-    "Wang Thonglang",
-    "Bueng Kum",
-    "Saphan Sung",
-    "Bang Na",
-    "Phra Khanong",
-    "Watthana",
-    "Khlong Toei",
-    "Yan Nawa",
-    "Bang Kho Laem",
-    "Thon Buri",
-    "Khlong San",
-    "Chom Thong",
-    "Rat Burana",
-    "Thung Khru",
-    "Bang Khun Thian",
-    "Bang Bon",
-    "Bang Khae",
-    "Phasi Charoen",
-    "Nong Khaem",
-    "Taling Chan",
-    "Thawi Watthana",
-  ];
+  public static readonly bangkokDistricts = BANGKOK_DISTRICTS;
 
-  public static readonly peripheralProvinces = {
-    "Samut Prakan": [
-      "Mueang Samut Prakan",
-      "Phra Pradaeng",
-      "Phra Samut Chedi",
-      "Bang Bo",
-      "Bang Phli",
-      "Bang Sao Thong",
-    ],
-    "Nonthaburi": [
-      "Mueang Nonthaburi",
-      "Bang Kruai",
-      "Bang Yai",
-      "Bang Bua Thong",
-      "Sai Noi",
-      "Pak Kret",
-    ],
-    "Pathum Thani": [
-      "Mueang Pathum Thani",
-      "Khlong Luang",
-      "Thanyaburi",
-      "Lam Luk Ka",
-      "Lat Lum Kaeo",
-      "Sam Khok",
-      "Nong Suea",
-    ],
-    "Samut Sakhon": ["Mueang Samut Sakhon", "Krathum Baen", "Ban Phaeo"],
-    "Nakhon Pathom": [
-      "Mueang Nakhon Pathom",
-      "Kamphaeng Saen",
-      "Nakhon Chai Si",
-      "Don Tum",
-      "Bang Len",
-      "Sam Phran",
-      "Phutthamonthon",
-    ],
-    "Bangkok": WeatherService.bangkokDistricts,
-  };
-
-  // Cache System
-  private static searchCache = new Map<string, string[]>();
+  public static readonly peripheralProvinces = PERIPHERAL_PROVINCES;
 
   private static getWindDirection(degrees: number): string {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -170,7 +85,7 @@ export class WeatherService {
   private static getDayName(dateStr: string): string {
     const days = [
       "Sunday",
-      "Monday", 
+      "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
@@ -181,7 +96,9 @@ export class WeatherService {
   }
 
   private static resolveCityName(location: string): string {
-    if (WeatherService.bangkokDistricts.includes(location))
+    if (
+      (WeatherService.bangkokDistricts as readonly string[]).includes(location)
+    )
       return `${location}, Bangkok`;
     if (Object.keys(WeatherService.peripheralProvinces).includes(location))
       return location;
@@ -203,52 +120,67 @@ export class WeatherService {
     );
   }
 
-  // Public Methods
   static searchLocations(searchTerm: string): string[] {
     const term = searchTerm.toLowerCase().trim();
     const results: string[] = [];
 
     if (!term) {
-      Object.keys(this.peripheralProvinces).forEach(province => {
-        results.push(province);
-        if (province === 'Bangkok') {
-          this.bangkokDistricts.forEach(district => {
+      Object.entries(this.peripheralProvinces).forEach(
+        ([province, districts]) => {
+          results.push(province);
+          (districts as readonly string[]).forEach((district) => {
             results.push(`${district}, ${province}`);
           });
-        } else {
-          this.peripheralProvinces[province as keyof typeof this.peripheralProvinces]
-            .forEach(district => {
-              results.push(`${district}, ${province}`);
-            });
         }
-      });
+      );
       return results;
     }
 
     const searchWords = term.split(/\s+/);
+    const matchesSearch = (text: string) =>
+      searchWords.every((word) => text.toLowerCase().includes(word));
 
-    this.bangkokDistricts.forEach(district => {
-      if (searchWords.every(word => district.toLowerCase().includes(word))) {
+    this.bangkokDistricts.forEach((district) => {
+      if (matchesSearch(district)) {
         results.push(`${district}, Bangkok`);
       }
     });
 
-    Object.entries(this.peripheralProvinces).forEach(([province, districts]) => {
-      if (searchWords.every(word => province.toLowerCase().includes(word))) {
-        results.push(province);
-      }
-      
-      districts.forEach(district => {
-        if (searchWords.every(word => district.toLowerCase().includes(word))) {
-          results.push(`${district}, ${province}`);
+    Object.entries(this.peripheralProvinces).forEach(
+      ([province, districts]) => {
+        if (matchesSearch(province)) {
+          results.push(province);
         }
-      });
-    });
+
+        (districts as readonly string[]).forEach((district) => {
+          if (matchesSearch(district)) {
+            results.push(`${district}, ${province}`);
+          }
+        });
+      }
+    );
 
     return Array.from(new Set(results));
   }
 
   static async getWeather(
+    location: string = DEMO_CONFIG.LOCATION.DEFAULT
+  ): Promise<WeatherData> {
+    if (hasApiKey) {
+      try {
+        return await WeatherApiService.getWeather(location);
+      } catch (error) {
+        console.error(
+          "[WeatherService] API call failed, falling back to demo data:",
+          error
+        );
+      }
+    }
+
+    return this.getDemoWeather(location);
+  }
+
+  private static async getDemoWeather(
     location: string = DEMO_CONFIG.LOCATION.DEFAULT
   ): Promise<WeatherData> {
     try {
@@ -343,4 +275,3 @@ export class WeatherService {
 
 export const searchLocations =
   WeatherService.searchLocations.bind(WeatherService);
-export const fetchWeatherData = WeatherService.getWeather.bind(WeatherService);

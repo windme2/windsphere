@@ -7,7 +7,7 @@ import { WeatherService } from "@/services/weather.service";
 
 interface SearchBarProps {
   onSearch: (city: string) => void;
-  initialCity?: string; // Enhanced search functionality
+  initialCity?: string;
   isLoading?: boolean;
 }
 
@@ -20,6 +20,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setSearchTerm(initialCity);
+  }, [initialCity]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

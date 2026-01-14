@@ -1,8 +1,13 @@
-export type WeatherCondition = 
-  | "clear-day" | "clear-night"
-  | "partly-cloudy-day" | "partly-cloudy-night"
-  | "cloudy" | "rain" | "thunderstorm" 
-  | "snow" | "mist";
+export type WeatherCondition =
+  | "clear-day"
+  | "clear-night"
+  | "partly-cloudy-day"
+  | "partly-cloudy-night"
+  | "cloudy"
+  | "rain"
+  | "thunderstorm"
+  | "snow"
+  | "mist";
 
 export interface CurrentWeather {
   temperature: number;

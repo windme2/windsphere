@@ -20,9 +20,7 @@ export const useWeather = (initialLocation: string) => {
       if (err instanceof WeatherError) {
         setError(err);
       } else {
-        setError(
-          new WeatherError("Unknown error occurred", "NETWORK_ERROR")
-        );
+        setError(new WeatherError("Unknown error occurred", "NETWORK_ERROR"));
       }
     } finally {
       setIsLoading(false);
@@ -33,6 +31,7 @@ export const useWeather = (initialLocation: string) => {
     setIsLoading(true);
     setWeatherData(null);
     setError(null);
+    setLocation("");
     setTimeout(() => setIsLoading(false), 500);
   }, []);
 

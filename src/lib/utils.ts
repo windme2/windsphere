@@ -5,7 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Format temperature to show °C
 export const formatTemp = (temp: number): string => {
   return `${Math.round(temp)}°C`;
 };

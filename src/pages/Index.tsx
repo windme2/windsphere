@@ -1,4 +1,3 @@
-import React from "react";
 import { useWeather } from "@/hooks/useWeather";
 import SearchBar from "@/components/SearchBar";
 import WeatherDisplay from "@/components/WeatherDisplay";
@@ -20,10 +19,7 @@ const Index = () => {
   } = useWeather("");
 
   const handleLogoClick = () => {
-    if (weatherData) {
-      resetLocation();
-    }
-    window.location.reload();
+    resetLocation();
   };
 
   const renderLoading = () => (
@@ -44,17 +40,17 @@ const Index = () => {
       <Cloud className="h-16 w-16 text-red-500 mb-4" />
       <h3 className="text-xl font-semibold text-gray-800 mb-2">
         {error?.type === "LOCATION_NOT_FOUND"
-          ? "Location not found"
+          ? "Location Not Found"
           : error?.type === "NETWORK_ERROR"
-          ? "Unable to connect to network"
-          : "Error loading data"}
+          ? "Network Connection Error"
+          : "Error Loading Weather Data"}
       </h3>
       <p className="text-gray-600">
         {error?.type === "LOCATION_NOT_FOUND"
-          ? "Please check the province or district name and try again"
+          ? "The location you entered could not be found. Please check the spelling and try again."
           : error?.type === "NETWORK_ERROR"
-          ? "Please check your internet connection"
-          : "Please try again later"}
+          ? "Unable to connect to the weather service. Please check your internet connection."
+          : "An unexpected error occurred. Please try again later."}
       </p>
       <Button
         onClick={resetLocation}
@@ -84,7 +80,8 @@ const Index = () => {
             <Search className="h-8 w-8 text-sky-500 mb-3" />
             <h3 className="font-semibold text-gray-800 mb-2">1. Search</h3>
             <p className="text-gray-600 text-sm text-center">
-              Type the city or district name you want to see weather information for in the search box
+              Type the city or district name you want to see weather information
+              for in the search box
             </p>
           </div>
 
@@ -94,13 +91,16 @@ const Index = () => {
               2. Select Location
             </h3>
             <p className="text-gray-600 text-sm text-center">
-              Select a location from the suggested list or click search to view information
+              Select a location from the suggested list or click search to view
+              information
             </p>
           </div>
 
           <div className="flex flex-col items-center p-4 bg-sky-50 rounded-lg">
             <Calendar className="h-8 w-8 text-sky-500 mb-3" />
-            <h3 className="font-semibold text-gray-800 mb-2">3. View Forecast</h3>
+            <h3 className="font-semibold text-gray-800 mb-2">
+              3. View Forecast
+            </h3>
             <p className="text-gray-600 text-sm text-center">
               Get current weather conditions and 5-day forecast
             </p>
@@ -108,26 +108,29 @@ const Index = () => {
         </div>
 
         <div className="text-center text-gray-500 text-sm">
-          Start by typing the city or district name you want in the search box above
+          Start by typing the city or district name you want in the search box
+          above
         </div>
       </CardContent>
     </Card>
   );
 
   return (
-    <div className={`min-h-screen w-full bg-gradient-to-b from-sky-blue to-blue-200 transition-colors duration-700`}>
+    <div
+      className={`min-h-screen w-full bg-gradient-to-b from-sky-blue to-blue-200 transition-colors duration-700`}
+    >
       {isLoading && <LoadingSpinner />}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12 sm:py-16">
         <header className="flex flex-col sm:flex-row justify-between items-center mb-8">
           <div className="flex flex-col items-start mb-4 sm:mb-0">
-            <div 
+            <div
               onClick={handleLogoClick}
               className="flex items-center cursor-pointer hover:opacity-80 transition-opacity"
             >
               <div className="relative mr-3 flex items-center">
                 <div className="h-12 w-12 rounded-full bg-white/30 flex items-center justify-center backdrop-blur-sm border border-white/50">
                   <Cloud className="h-8 w-8 text-white" />
-               </div>
+                </div>
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold text-white">
                 WindSphere

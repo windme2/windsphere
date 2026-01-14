@@ -2,32 +2,27 @@
 
 A modern weather forecast application for **Bangkok Metropolitan Region**. Get accurate weather information with a beautiful and intuitive interface, built with React and TypeScript.
 
-> **🚀 [Live Demo](https://windsphere-demo.vercel.app)** - *Coming Soon*
+> **🚀 [Live Demo](https://windsphere.vercel.app)** - *Coming Soon*
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Frontend:** React 18, TypeScript, Vite, TailwindCSS
-- **UI Components:** shadcn/ui, Radix UI, Lucide React Icons
-- **Location Data:** Bangkok Districts & Metropolitan Region
-- **Features:** Weather Simulation, 5-Day Forecast, Glass Morphism UI
-- **Routing:** React Router DOM
-- **Data Fetching:** TanStack React Query
-- **Build Tools:** Vite, PostCSS, Autoprefixer
-- **Code Quality:** ESLint, TypeScript ESLint, Prettier
-- **Deployment:** Vercel (Frontend)
+- **Frontend:** React 18, TypeScript, Vite
+- **Styling:** TailwindCSS, shadcn/ui, Radix UI
+- **Icons:** Lucide React
+- **API Client:** Axios (OpenWeatherMap API)
 
 ---
 
 ## ✨ Features
 
 ### 🌡️ Weather Information
-- 🌡️ Realistic weather simulation with dynamic temperature variations
+- 🌡️ Real-time weather data from OpenWeatherMap API
 - 📅 5-day weather forecast with detailed daily breakdown
 - 📊 Comprehensive weather statistics (humidity, wind, feels like)
 - 🌧️ Precipitation probability and weather descriptions
-- 🕐 Dynamic data generation with realistic weather patterns
+- 🔄 Demo mode with simulated data (no API key required)
 
 ### 🗺️ Location Coverage
 - 🏙️ **Bangkok** - All 50 districts covered
@@ -42,9 +37,9 @@ A modern weather forecast application for **Bangkok Metropolitan Region**. Get a
 - 🔍 Intelligent search by district/province with auto-suggestions
 - 📱 Fully responsive design optimized for all devices
 - 🎨 Modern UI with smooth animations and glass-morphism effects
-- ⚡ Fast loading with smart caching (15-minute cache duration)
+- ⚡ Fast loading with smart caching (15-minute cache)
 - 🌈 Beautiful gradient backgrounds and weather-appropriate icons
-
+- 🔑 Supports both real API and demo data modes
 ---
 
 ## 🚀 Getting Started
@@ -70,6 +65,17 @@ npm run dev
 ```
 App will be available at `http://localhost:5173`
 
+### Configure Weather API (Optional)
+By default, the app uses 
+To use real weather data from OpenWeatherMap:
+
+1. Get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
+2. Copy `.env.example` to `.env`
+3. Add your API key:
+```env
+VITE_WEATHER_API_KEY=your_api_key_here
+```
+4. Restart the dev server
 ### Build for production
 ```bash
 npm run build
