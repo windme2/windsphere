@@ -10,7 +10,7 @@ import {
   CloudMoon,
   CloudSun,
 } from "lucide-react";
-import { WeatherCondition } from "@/types/weather";
+import type { WeatherCondition } from "@/types/weather";
 
 interface WeatherIconProps {
   condition: WeatherCondition;

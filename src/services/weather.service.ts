@@ -1,4 +1,4 @@
-import {
+import type {
   WeatherCondition,
   CurrentWeather,
   ForecastDay,
@@ -63,12 +63,15 @@ const DEMO_CONFIG = {
 } as const;
 
 export class WeatherError extends Error {
+  public type: "LOCATION_NOT_FOUND" | "DEMO_ERROR" | "NETWORK_ERROR";
+  
   constructor(
     message: string,
-    public type: "LOCATION_NOT_FOUND" | "DEMO_ERROR" | "NETWORK_ERROR"
+    type: "LOCATION_NOT_FOUND" | "DEMO_ERROR" | "NETWORK_ERROR"
   ) {
     super(message);
     this.name = "WeatherError";
+    this.type = type;
   }
 }
 

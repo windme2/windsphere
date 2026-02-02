@@ -1,5 +1,5 @@
 import React from "react";
-import { ForecastDay } from "@/types/weather";
+import type { ForecastDay } from "@/types/weather";
 import WeatherIcon from "./WeatherIcon";
 import { Droplets } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";

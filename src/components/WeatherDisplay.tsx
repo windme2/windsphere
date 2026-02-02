@@ -1,5 +1,5 @@
 import React from "react";
-import { CurrentWeather } from "@/types/weather";
+import type { CurrentWeather } from "@/types/weather";
 import WeatherIcon from "./WeatherIcon";
 import { Wind, Droplets } from "lucide-react";
 import { cn } from "../lib/utils";

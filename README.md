@@ -4,6 +4,8 @@ A modern weather forecast application for **Bangkok Metropolitan Region**. Get a
 
 > **🚀 [Live Demo](https://windsphere.vercel.app)** - *Coming Soon*
 
+![WindSphere Preview](https://via.placeholder.com/800x400/0ea5e9/ffffff?text=WindSphere+Weather+App)
+
 ---
 
 ## ⚙️ Tech Stack
@@ -66,7 +68,8 @@ npm run dev
 App will be available at `http://localhost:5173`
 
 ### Configure Weather API (Optional)
-By default, the app uses 
+By default, the app uses demo data with simulated weather information.
+
 To use real weather data from OpenWeatherMap:
 
 1. Get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
@@ -84,7 +87,29 @@ npm run preview
 
 ---
 
-## 🔧 Configuration
+## � Project Structure
+
+```
+windsphere/
+├── src/
+│   ├── components/      # Reusable UI components
+│   │   ├── ui/         # shadcn/ui components
+│   │   └── ...
+│   ├── config/         # Configuration files
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions
+│   ├── pages/          # Page components
+│   ├── services/       # API and business logic
+│   │   ├── weather.api.ts     # API client
+│   │   └── weather.service.ts # Weather service layer
+│   └── types/          # TypeScript type definitions
+├── public/             # Static assets
+└── ...config files
+```
+
+---
+
+## �🔧 Configuration
 
 | File | Description |
 |------|-------------|
